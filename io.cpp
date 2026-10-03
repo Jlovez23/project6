@@ -11,27 +11,28 @@ int main(){
 	std::string sintOne;
 	std::string sintTwo;
 	std::stringstream converter;
+	std::string currentline;
 	int i;
 	bool keepGoing = true;
 	inFile.open("data.csv");
-	while(keepGoing){
-		if(!inFile.eof()){
-			getline(inFile, sintOne, ',');
-			getline(inFile, sintTwo, ',');
-			getline(inFile, text);
-			converter.clear();
-			converter.str("");
-			converter << sintOne << " " << sintTwo;
-			converter >> intOne >> intTwo;
-			sumint = intOne + intTwo;
-			//std::cout << text << sumint;
-			for(i=0;i<sumint;i++){
-				std::cout << text;
-			}//end for
-			std::cout << "\n";
-		}// end if
-		else{
-			keepGoing = false;
-		}//end else
+	
+	while(getline(inFile, currentline)){
+		std::stringstream lineParser(currentline);
+
+		getline(lineParser, sintOne, ',');
+		getline(lineParser, sintTwo, ',');
+		getline(lineParser, text);
+
+		converter.clear();
+		converter.str("");
+		converter << sintOne << " " << sintTwo;
+		converter >> intOne >> intTwo;
+
+		sumint = intOne + intTwo;
+
+		for(i=0;i<sumint;i++){
+			std::cout << text;
+		}//end for
+		std::cout << "\n";
 	}//end while
 } // end main
